@@ -14,13 +14,14 @@
     --mint: #7fd9bb;
     --sky-ink: #fff8ee;
   
-    --ink: #2a2347;
-    --muted: #6c6488;
-    --line: rgba(42, 35, 71, 0.18);
-    --bar: #2a2347;
-    --paper: #fff8ee;
-    --accent: #5b46c2;
-  
+    --ink: #fff8eee8;
+    --muted: #b9b2d6;
+    --line: rgba(255, 248, 238, 0.18);
+    --paper: #151230;
+    --bar: #0b091d;
+    --edge: #7a69c9;   /* new: border color */
+    --accent: #a999ff;
+
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -35,6 +36,14 @@
     --hill2: #5eb48c;
     --lamp-glow: rgba(255, 198, 92, 0);
     --sky-ink: #2a2347;
+  
+    --ink: #2a2347;
+    --muted: #6c6488;
+    --line: rgba(42, 35, 71, 0.18);
+    --bar: #2a2347;
+    --paper: #fff8ee;
+    --accent: #5b46c2;
+    --edge: #2a2347;
   }
   
   @media (prefers-reduced-motion: reduce) {
@@ -229,10 +238,11 @@
   .window {
     pointer-events: auto;
     background: var(--paper);
-    border: 3px solid var(--bar);
+    border: 3px solid var(--edge);
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 6px 0 rgba(20, 16, 50, 0.35), 0 30px 60px rgba(10, 8, 30, 0.35);
+    transition: background 0.6s, color 0.6s, border-color 0.6s;
   }
   
   .bar {
@@ -477,6 +487,126 @@
   .d3 { background: linear-gradient(160deg, #e7d9ff, #9bb7ff 55%, #2e3f91); }
   .d4 { background: linear-gradient(160deg, #ffe0e0, #ffb36b 60%, #c5473c); }
   
+  /* ==========================================================================
+     Viewer (blender + art)
+     ========================================================================== */
+
+  .open {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    border-radius: 10px;
+    cursor: zoom-in;
+    transition: transform 0.18s;
+  }
+
+  .open:hover { transform: scale(1.03); }
+
+  .open .img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .lb {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 56px 20px 24px;
+    background: rgba(10, 8, 30, 0.5);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    cursor: zoom-out;
+  }
+
+  .lb.on {
+    display: flex;
+    animation: fade 0.2s ease-out;
+  }
+
+  @keyframes fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .lb__fig {
+    margin: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    cursor: default;
+  }
+
+  .lb__stage {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  /* The whole work is shown (contain, never cropped) */
+  .lb__stage img,
+  .lb__stage video {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(92vw, 1100px);
+    max-height: calc(100svh - 170px);
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  }
+
+  .lb__stage .ph {
+    width: min(92vw, 720px, calc((100svh - 170px) * 4 / 3));
+    border: 0;
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  }
+
+  .lb figcaption {
+    text-align: center;
+    color: #fff8ee;
+  }
+
+  .lb figcaption b {
+    display: block;
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .lb figcaption span {
+    opacity: 0.85;
+    font-size: 0.95rem;
+  }
+
+  /* Close button sits in the screen corner, never on the work */
+  .lb__x {
+    position: absolute;
+    top: calc(14px + env(safe-area-inset-top, 0px));
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(20, 16, 50, 0.6);
+    color: #fff8ee;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .lb__x:hover { background: rgba(20, 16, 50, 0.85); }
+
   /* ==========================================================================
      Contact
      ========================================================================== */

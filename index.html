@@ -51,7 +51,7 @@
       <!-- Home -->
       <section class="pane on" id="home">
         <h1>hi, I'm Isabella</h1>
-        <p class="role">computer science and computer graphics</p>
+        <p class="role">things I've made in computer science and graphics</p>
 
         <nav class="nav" aria-label="Sections">
           <button class="tab" data-go="about">
@@ -81,12 +81,12 @@
       <section class="pane" id="about">
         <button class="back" data-go="home">&larr; back</button>
         <h2>about</h2>
-        <p class="lede">I'm a B.Sc. student in Computer Science at the University of Copenhagen and I build software, model in 3D, and paint digital art. I enjoy work where the technical side and the visual side meet.</p>
+        <p class="lede">I'm a Computer Science B.Sc. student at the University of Copenhagen and I build software, model in 3D, and paint digital art. I enjoy work where the technical and the visual side meet.</p>
         <dl>
           <dt>Code</dt><dd>Java, Python, C#, C, F#, SQL, GDScript and JavaScript</dd>
           <dt>3D</dt><dd>Blender: modelling, shading, lighting, and short animations</dd>
           <dt>Art</dt><dd>Digital painting and illustration in Procreate and Photoshop</dd>
-          <dt>Based in</dt><dd>Copenhagen</dd>
+          <dt>Based in</dt><dd>Copenhagen, Denmark</dd>
         </dl>
       </section>
 
@@ -109,7 +109,7 @@
         <h2>blender projects</h2>
         <p class="lede">Models, scenes, and short animations made in Blender.</p>
         <div class="grid">
-          <figure class="tile"><div class="img b1"></div><figcaption>Donut<small>Geometry, nodes, lighting, shader study</small></figcaption></figure>
+          <figure class="tile"><button class="open" type="button"><div class="img b1"></div></button><figcaption>Donut<small>Geometry, nodes, lighting, shader study</small></figcaption></figure>
         </div>
       </section>
 
@@ -119,7 +119,7 @@
         <h2>digital artworks</h2>
         <p class="lede">Paintings and illustrations from the last two years.</p>
         <div class="grid">
-          <figure class="tile"><div class="img d1"></div><figcaption>Title<small>Procreate, 2026</small></figcaption></figure>
+          <figure class="tile"><button class="open" type="button"><div class="img d1"></div></button><figcaption>Title<small>Procreate, 2026</small></figcaption></figure>
         </div>
       </section>
 
@@ -128,7 +128,7 @@
         <button class="back" data-go="home">&larr; back</button>
         <h2>contact</h2>
         <p class="lede">For commissions, collaborations, or just to say hello.</p>
-        <a class="mail" href="mailto:hello@example.com">hello@example.com</a>
+        <!--<a class="mail" href="mailto:hello@example.com">hello@example.com</a>-->
         <div class="links">
           <a href="https://github.com/bellpy">GitHub</a>
           <a href="#">Instagram</a>
@@ -138,6 +138,17 @@
   </main>
 
   <footer>&copy; <span id="yr">2026</span> bellpy</footer>
+
+  <!-- Viewer for blender + art
+       Images: <img class="img" src="..." alt="..."> or
+       Videos: <video class="img" src="..." muted playsinline preload="metadata"></video> -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Work viewer">
+    <button class="lb__x" id="lbx" type="button" aria-label="Close">&times;</button>
+    <figure class="lb__fig">
+      <div class="lb__stage" id="lbstage"></div>
+      <figcaption><b id="lbt"></b><span id="lbm"></span></figcaption>
+    </figure>
+  </div>
 
   <script src="script.js"></script>
 </body>
